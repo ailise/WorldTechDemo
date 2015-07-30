@@ -20,37 +20,46 @@ public class PathInstantiate : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		for (int i = 0; i < 100; i++) {
+		if (counter < 50){
 			
-			Transform floorClone = (Transform)Instantiate (floorPrefab, new Vector3 (i * 5f, 0f, 0f), floorPrefab.rotation);
-			//			floorClone.localScale = new Vector3 (5f, 0f, 0f);
-			listOfFloorClones.Add (floorClone);
-		
-	
-			if (counter < 50) {
-
-				float rand = Random.Range (0.0f, 1.0f);
-				counter++;
-				Debug.Log (Random.Range (0.0f, 1.0f));
-
-				if (rand < 0.25f) {
+			float rand = Random.Range (0.0f, 1.0f);
+			counter++;
+			Debug.Log (Random.Range (0.0f, 1.0f));
+			
+			if (rand < 0.25f) {
 				
-					floorClone.Rotate (0f, 90f, 0f);
+				floorPrefab.Rotate (0f, 90, 0f);
+				
+			} else if (rand > 0.5f) {
+				
+				floorPrefab.Rotate (0f, -90, 0f);
+			}
+		}
 
-				} else if (rand < 0.25f && rand > 0.5f) {
 
-					floorClone.Rotate (0, -90, 0);
-				}
+		Instantiate (floorPrefab, transform.position, Quaternion.identity);
+		transform.Translate (0f,0f,5f);
+
+		if (Input.GetKeyDown (KeyCode.R)) {
 			
+			Application.LoadLevel (Application.loadedLevel);
+			
+		}
+
+//			listOfFloorClones.Add (floorClone);
+		
+//		else { 
+//
+//			Destroy.gameObject; }
+//
+		//		for (int i = 0; i < 100; i++) {
+		//			
+		//			Transform floorClone = (Transform)			
 		
 			}
 		
 		}
 		
-		if (Input.GetKeyDown (KeyCode.R)) {
-		
-			Application.LoadLevel (Application.loadedLevel);
-		
-		}
-	}
-}
+
+	
+
